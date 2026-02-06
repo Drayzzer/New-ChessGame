@@ -8,8 +8,6 @@ namespace Script
     {
         [SerializeField] private Tilemap tilemap;
          
-         Board _board = new Board();
-         
         [SerializeField] private TileBase WhitePawn;
         [SerializeField] private TileBase BlackPawn;
         [SerializeField] private TileBase WhiteRook;
@@ -23,17 +21,16 @@ namespace Script
         [SerializeField] private TileBase WhiteQueen;
         [SerializeField] private TileBase BlackQueen;
         
-        [ContextMenu("Set All Tiles")]
-        private void Tilebase ()
+        public void SetAllTiles(Board board)
         {
-            for (int i = 0; i < _board.Matrix.GetLength(0); i++)
+            for (int i = 0; i < board.Matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < _board.Matrix.GetLength(1); j++)
+                for (int j = 0; j < board.Matrix.GetLength(1); j++)
                 {
-                    Piece piece = _board.Matrix[i, j];
+                    Piece piece = board.Matrix[i, j];
                     //permet de placer les pions sur l'échiquier
                     switch (piece)
-                    {
+                    {   
                         case Pawn:
                             tilemap.SetTile(new Vector3Int(j, i, 0), piece.Color == ColorPiece.White ? WhitePawn : BlackPawn);
                             break;

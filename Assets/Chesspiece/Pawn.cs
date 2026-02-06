@@ -29,7 +29,7 @@ namespace Chesspiece
             }
             
             // Bottom
-            if (Pos.y - 1 > 0)
+            if (Pos.y - 1 >= 0)
             {
                 if (board[Pos.x, -1] == null || board[Pos.x, -1].Color != Color) 
                 { 

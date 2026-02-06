@@ -29,7 +29,7 @@ namespace Chesspiece
             }
             
             //Left puis Top
-            if (Pos.x - 1 > 0 && Pos.y + 2 < board.GetLength(1))
+            if (Pos.x - 1 >= 0 && Pos.y + 2 < board.GetLength(1))
             {
                 if (board[Pos.x - 1, Pos.y + 2] == null || board [Pos.x - 1, Pos.y + 2].Color != Color) 
                 { 
@@ -39,7 +39,7 @@ namespace Chesspiece
             }
             
             //Right puis Bottom
-            if (Pos.x + 1 < board.GetLength(0) && Pos.y - 2 > 0)
+            if (Pos.x + 1 < board.GetLength(0) && Pos.y - 2 >= 0)
             {
                 if (board[Pos.x + 1, Pos.y - 2] == null || board [Pos.x + 1, Pos.y - 2].Color != Color) 
                 {
@@ -49,7 +49,7 @@ namespace Chesspiece
             }
             
             //Left puis Bottom
-            if (Pos.x - 1 > 0 && Pos.y - 2 > 0)
+            if (Pos.x - 1 >= 0 && Pos.y - 2 >= 0)
             {
                 if (board[Pos.x - 1, Pos.y - 2] == null || board [Pos.x - 1, Pos.y - 2].Color != Color) 
                 { 
@@ -69,7 +69,7 @@ namespace Chesspiece
             }
             
             //Left puis Top
-            if (Pos.x - 2 > 0 && Pos.y + 1 < board.GetLength(1))
+            if (Pos.x - 2 >= 0 && Pos.y + 1 < board.GetLength(1))
             {
                 if (board[Pos.x - 2, Pos.y + 1] == null || board [Pos.x - 2, Pos.y + 1].Color != Color) 
                 { 
@@ -79,7 +79,7 @@ namespace Chesspiece
             }
             
             //Right puis Bottom
-            if (Pos.x + 2 < board.GetLength(0) && Pos.y - 1 > 0)
+            if (Pos.x + 2 < board.GetLength(0) && Pos.y - 1 >= 0)
             {
                 if (board[Pos.x + 2, Pos.y - 1] == null || board [Pos.x + 2, Pos.y - 1].Color != Color) 
                 { 
@@ -89,7 +89,7 @@ namespace Chesspiece
             }
             
             //Left puis Bottom
-            if (Pos.x - 2 > 0 && Pos.y - 1 > 0)
+            if (Pos.x - 2 >= 0 && Pos.y - 1 >= 0)
             {
                 if (board[Pos.x - 2, Pos.y - 1] == null || board [Pos.x - 2, Pos.y - 1].Color != Color) 
                 { 

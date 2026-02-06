@@ -40,16 +40,16 @@ namespace Chesspiece
             // Left
             for (int i = Pos.x; i >= 0; i--)
             {
-                if (board[-i, Pos.y] == null )
+                if (board[i, Pos.y] == null )
                 {
-                    moves.Add(new Vector2Int(-i, Pos.y)); 
+                    moves.Add(new Vector2Int(i, Pos.y)); 
                 }
-                else if (board[-i, Pos.y].Color != Color)
+                else if (board[i, Pos.y].Color != Color)
                 {
-                    moves.Add(new Vector2Int(-i, Pos.y));
+                    moves.Add(new Vector2Int(i, Pos.y));
                     break;
                 }
-                else if (board[-i, Pos.y].Color == Color){}
+                else if (board[i, Pos.y].Color == Color){}
             }
             
             // Top
@@ -71,16 +71,16 @@ namespace Chesspiece
             //Bottom
             for (int i = Pos.y; i >= 0; i--)
             { 
-                if (board[Pos.x,-i] == null) 
+                if (board[Pos.x,i] == null) 
                 { 
-                    moves.Add(Pos + new Vector2Int(Pos.x,-i));
+                    moves.Add(Pos + new Vector2Int(Pos.x,i));
                 }
-                else if (board[Pos.x, -i].Color != Color)
+                else if (board[Pos.x, i].Color != Color)
                 {
-                    moves.Add(Pos + new Vector2Int(Pos.x,-i));
+                    moves.Add(Pos + new Vector2Int(Pos.x,i));
                     break;
                 }
-                else if (board[Pos.x, -i].Color == Color) {}
+                else if (board[Pos.x, i].Color == Color) {}
                
             }
             

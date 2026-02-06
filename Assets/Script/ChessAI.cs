@@ -6,22 +6,26 @@ namespace Script
 {
     public class ChessAI : MonoBehaviour
     {
-        Node Node;
-        Board Board = new Board();
+        private Link _link;
+        private Board _board;
 
         private void Start()
         {
+            _link = GetComponent<Link>();
+            
             //Création du board
-            Board board = new Board();
-            Debug.Log(board.Matrix.GetLength(0));
-            Debug.Log(board.Matrix.GetLength(1));
+             _board = new Board();
+            _board.SetupBaseBoard();
+            _board.SetupPieces();
+            
+            _link.SetAllTiles(_board);
 
             //permet de parcourir le plateau
-            for (int i = 0; i < board.Matrix.GetLength(0); i++)
+            for (int i = 0; i < _board.Matrix.GetLength(0); i++)
             {
-                for (int j = 0; j < board.Matrix.GetLength(1); j++)
+                for (int j = 0; j < _board.Matrix.GetLength(1); j++)
                 {
-                    Debug.Log(board.Matrix[i, j] + "");
+                    Debug.Log(_board.Matrix[i, j] + "");
                 }
             }
         }
@@ -29,14 +33,13 @@ namespace Script
         [ContextMenu("MinMax")]
         private void Launch()
         {
-            Think(Board.Matrix);
+            Think(_board.Matrix);
         }
         
         public void Think(Piece[,] board)
         {
-            Node startingNode = new Node(Board);
+            Node startingNode = new Node(_board);
             MinMax(startingNode, 2, true);
-            Debug.Log("il joue !");
         }
         
         public float MinMax(Node node, int depth, bool maximizingPlayer)

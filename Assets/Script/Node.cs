@@ -14,7 +14,6 @@ public class Node
     {
         Board = board.Clone() as Board;
     }
-    
     //Graph des noeuds
     public List<Node> GetChildren()
     {
@@ -23,8 +22,10 @@ public class Node
         // Récupérer toutes les pièces de ma couleur
         foreach (Piece piece in Board.Matrix)
         {
-            if (piece == null) continue;
-            
+            if (piece == null)
+            {
+                continue;
+            }
             // Récupérer tout les mouvements de ma pièce
             foreach (Vector2Int move in piece.GetAvailableMoves(Board.Matrix))
             {

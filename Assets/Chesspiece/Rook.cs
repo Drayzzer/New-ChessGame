@@ -23,19 +23,7 @@ namespace Chesspiece
             // Right
             for (int i = Pos.x; i < board.GetLength(0); i++)
             {
-                if (board[i, Pos.y] == null)
-                {
-                    moves.Add(new Vector2Int(i, Pos.y)); 
-                }
-                else if (board[i, Pos.y].Color != Color)
-                {
-                    moves.Add(new Vector2Int(i, Pos.y)); 
-                    break;
-                }
-                else if (board[i, Pos.y].Color == Color)
-                {
-                    break;
-                }
+                if (!TryAddPosition(board, moves, new Vector2Int(i, Pos.y))) break;
             }
             
             //Left
@@ -43,14 +31,14 @@ namespace Chesspiece
             {
                 if (board[i, Pos.y] == null)
                 {
-                    moves.Add(new Vector2Int(-i, Pos.y));
+                    moves.Add(new Vector2Int(i, Pos.y));
                 }
-                else if (board[-i, Pos.y].Color != Color)
+                else if (board[i, Pos.y].Color != Color)
                 {
-                    moves.Add(new Vector2Int(-i, Pos.y));
+                    moves.Add(new Vector2Int(i, Pos.y));
                     break;
                 }
-                else if (board[-i, Pos.y].Color == Color)
+                else if (board[i, Pos.y].Color == Color)
                 {
                     break;
                 }
@@ -79,14 +67,14 @@ namespace Chesspiece
             {
                 if (board[Pos.x, i] == null)
                 {
-                    moves.Add(new Vector2Int(Pos.x, -i)); 
+                    moves.Add(new Vector2Int(Pos.x, i)); 
                 }
-                else if (board[Pos.x, -i].Color != Color)
+                else if (board[Pos.x, i].Color != Color)
                 {
-                    moves.Add(new Vector2Int(Pos.x, -i));
+                    moves.Add(new Vector2Int(Pos.x, i));
                     break;
                 }
-                else if (board[Pos.x, -i].Color == Color)
+                else if (board[Pos.x,i].Color == Color)
                 {
                     break;
                 }

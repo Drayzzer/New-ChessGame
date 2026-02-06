@@ -22,17 +22,22 @@ namespace Chesspiece
             List<Vector2Int> moves = new List<Vector2Int>();
 
             // Right
+            TryAddPosition(board, moves, new Vector2Int(1, 0));
+            
             if (Pos.x + 1 < board.GetLength(0))
             {
-                if (board[1, Pos.y] == null || board[1, Pos.y].Color != Color)
-                { 
-                    moves.Add(new Vector2Int(1, Pos.y)); 
+                if (board[Pos.x + 1, Pos.y] == null)
+                {
+                    moves.Add(new Vector2Int(Pos.x + 1, Pos.y)); 
                 }
-                else if (board[0, Pos.y].Color == Color){}
+                else if (board[Pos.x + 1, Pos.y].Color != Color)
+                {
+                    moves.Add(new Vector2Int(Pos.x + 1, Pos.y)); 
+                }
             }
             
             // Left
-            if (Pos.x - 1 > 0 )
+            if  (Pos.x -1 >= 0)
             {
                 if (board[-1, Pos.y] == null || board[-1, Pos.y].Color != Color) 
                 { 
@@ -40,7 +45,6 @@ namespace Chesspiece
                 }
                 else if (board[0, Pos.y].Color == Color){}
             }
-            
             
             // Top
             if (Pos.y + 1 < board.GetLength(1))
@@ -53,11 +57,11 @@ namespace Chesspiece
             }
             
             // Bottom
-            if (Pos.y - 1 > 0)
+            for (int i = Pos.y - 1; i >= 0;)
             {
-                if (board[Pos.x, -1] == null || board[Pos.x, -1].Color != Color) 
+                if (board[Pos.x, i] == null || board[Pos.x, i].Color != Color) 
                 { 
-                    moves.Add(new Vector2Int(Pos.x, -1)); 
+                    moves.Add(new Vector2Int(Pos.x, i)); 
                 } 
                 else if (board[Pos.x, 0].Color == Color){}
             }
@@ -75,7 +79,7 @@ namespace Chesspiece
            
                 
             // left.Top
-            if (Pos.x - 1 > 0 && Pos.y + 1 < board.GetLength(1))
+            if (Pos.x - 1 >= 0 && Pos.y + 1 < board.GetLength(1))
             {
                 if (board[Pos.x - 1, Pos.y + 1] == null || board[Pos.x - 1, Pos.y + 1].Color != Color)
                 { 
@@ -97,7 +101,7 @@ namespace Chesspiece
             
             
             // Left.Bottom
-            if (Pos.x - 1 > 0 && Pos.y - 1 > 0)
+            if (Pos.x - 1 >= 0 && Pos.y - 1 >= 0)
             {
                 if (board[Pos.x - 1, Pos.y - 1] == null || board[Pos.x - 1, Pos.y - 1].Color != Color)
                 { 

@@ -31,5 +31,22 @@ namespace Chesspiece
         {
             return MemberwiseClone();
         }
+
+        protected bool TryAddPosition(Piece[,] board, List<Vector2Int> moves, Vector2Int dir)
+        {
+            Piece piece = board[Pos.x + dir.x, Pos.y + dir.y];
+            if (piece == null)
+            {
+                moves.Add(new Vector2Int(Pos.x + dir.x, Pos.y + dir.y));
+                return true;
+            }
+
+            if (piece.Color != Color)
+            {
+                moves.Add(new Vector2Int(Pos.x + dir.x, Pos.y + dir.y));
+            }
+
+            return false;
+        }
     }
 }
