@@ -34,18 +34,23 @@ namespace Chesspiece
 
         protected bool TryAddPosition(Piece[,] board, List<Vector2Int> moves, Vector2Int dir)
         {
+            if (Pos.x + dir.x > board.GetLength(0) || Pos.x + dir.x < 0) return false;
+            if (Pos.y + dir.y > board.GetLength(1) || Pos.y + dir.y < 0) return false;
+            
             Piece piece = board[Pos.x + dir.x, Pos.y + dir.y];
             if (piece == null)
             {
                 moves.Add(new Vector2Int(Pos.x + dir.x, Pos.y + dir.y));
                 return true;
             }
-
             if (piece.Color != Color)
             {
                 moves.Add(new Vector2Int(Pos.x + dir.x, Pos.y + dir.y));
             }
-
+            else
+            {
+                // same side
+            }
             return false;
         }
     }

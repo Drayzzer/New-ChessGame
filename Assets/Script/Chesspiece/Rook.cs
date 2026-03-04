@@ -21,63 +21,27 @@ namespace Chesspiece
             List<Vector2Int> moves = new List<Vector2Int>();
             
             // Right
-            for (int i = Pos.x; i < board.GetLength(0); i++)
+            for (int i = Pos.x + 1; i < board.GetLength(0); i++)
             {
-                if (!TryAddPosition(board, moves, new Vector2Int(i, Pos.y))) break;
+                if (!TryAddPosition(board, moves, new Vector2Int(i, 0))) break;
             }
             
             //Left
-            for (int i = Pos.x; i >= 0; i--)
-            {
-                if (board[i, Pos.y] == null)
-                {
-                    moves.Add(new Vector2Int(i, Pos.y));
-                }
-                else if (board[i, Pos.y].Color != Color)
-                {
-                    moves.Add(new Vector2Int(i, Pos.y));
-                    break;
-                }
-                else if (board[i, Pos.y].Color == Color)
-                {
-                    break;
-                }
+            for (int i = Pos.x - 1; i >= 0; i--)
+            { 
+                if (!TryAddPosition(board, moves, new Vector2Int(-i, 0))) break;
             }
             
             // Top
-            for (int i = Pos.y; i < board.GetLength(0); i++)
-            {
-                if (board[Pos.x, i] == null)
-                {
-                    moves.Add(new Vector2Int(Pos.x, i)); 
-                }
-                else if (board[Pos.x, i].Color != Color)
-                {
-                    moves.Add(new Vector2Int(Pos.x, i)); 
-                    break;
-                }
-                else if (board[Pos.x, i].Color == Color)
-                {
-                    break;
-                }
+            for (int i = Pos.y + 1; i < board.GetLength(0); i++)
+            { 
+                if (!TryAddPosition(board, moves, new Vector2Int(0, i))) break; 
             }
             
             // Bottom
-            for (int i = Pos.y; i >= 0; i--)
+            for (int i = Pos.y - 1; i >= 0; i--)
             {
-                if (board[Pos.x, i] == null)
-                {
-                    moves.Add(new Vector2Int(Pos.x, i)); 
-                }
-                else if (board[Pos.x, i].Color != Color)
-                {
-                    moves.Add(new Vector2Int(Pos.x, i));
-                    break;
-                }
-                else if (board[Pos.x,i].Color == Color)
-                {
-                    break;
-                }
+                if (!TryAddPosition(board, moves, new Vector2Int(0, -i))) break;
             }
             return moves;
         }

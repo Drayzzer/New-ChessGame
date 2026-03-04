@@ -17,25 +17,17 @@ namespace Chesspiece
         public override List<Vector2Int> GetAvailableMoves(Piece[,] board)
         {
             List<Vector2Int> moves = new List<Vector2Int>();
-            
+           
             // Top
             if (Pos.y + 1 < board.GetLength(1))
             {
-                if (board[Pos.x , 1] == null || board[Pos.x, 1].Color != Color) 
-                { 
-                    moves.Add(new Vector2Int(Pos.x, 1)); 
-                } 
-                moves.Add(new Vector2Int(Pos.x, 1));
+                TryAddPosition(board, moves, new Vector2Int(0, 1));
             }
             
             // Bottom
             if (Pos.y - 1 >= 0)
             {
-                if (board[Pos.x, -1] == null || board[Pos.x, -1].Color != Color) 
-                { 
-                    moves.Add(new Vector2Int(Pos.x, -1)); 
-                } 
-                moves.Add(new Vector2Int(Pos.x, -1));
+                TryAddPosition(board, moves, new Vector2Int(0, -1));
             }
             return moves;
         }

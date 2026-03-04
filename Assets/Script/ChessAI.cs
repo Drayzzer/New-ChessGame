@@ -30,10 +30,12 @@ namespace Script
             }
         }
 
-        [ContextMenu("MinMax")]
-        private void Launch()
+        private void Update()
         {
-            Think(_board.Matrix);
+            if (Input.GetButtonDown("Jump"))
+            {
+                Think(_board.Matrix);
+            }
         }
         
         public void Think(Piece[,] board)
