@@ -25,33 +25,51 @@ namespace Chesspiece
         
         public abstract List<Vector2Int> GetAvailableMoves(Piece[,] board);
 
-        public abstract void MovePiece(Piece[,] board,Vector2Int movement);
+        public void MovePiece(Piece[,] board,Vector2Int movement)
+        {
+            if (movement.x < 0 || movement.x > 7)
+                Debug.LogError("Something goes wrong with " + GetType().FullName + " x: " + movement.x);
+            
+            if (movement.y < 0 || movement.y > 7)
+                Debug.LogError("Something goes wrong with " + GetType().FullName + " y: " + movement.y);
+            
+            board[movement.x, movement.y] = this;
+            board[Pos.x, Pos.y] = null;
+            Pos = movement;
+        }
         
         public object Clone()
         {
             return MemberwiseClone();
         }
+        
+            protected bool TryAddPosition(Piece[,] board, List<Vector2Int> moves, Vector2Int dir)
+            {
+                int x = Pos.x + dir.x;
+                int y = Pos.y + dir.y;
 
-        protected bool TryAddPosition(Piece[,] board, List<Vector2Int> moves, Vector2Int dir)
-        {
-            if (Pos.x + dir.x > board.GetLength(0) || Pos.x + dir.x < 0) return false;
-            if (Pos.y + dir.y > board.GetLength(1) || Pos.y + dir.y < 0) return false;
-            
-            Piece piece = board[Pos.x + dir.x, Pos.y + dir.y];
-            if (piece == null)
-            {
-                moves.Add(new Vector2Int(Pos.x + dir.x, Pos.y + dir.y));
-                return true;
+                if (x < 0 || x >= board.GetLength(0)) return false;
+                if (y < 0 || y >= board.GetLength(1)) return false;
+
+                Piece piece = board[x, y];
+
+                if (piece == null)
+                {
+                    moves.Add(new Vector2Int(x, y));
+                    return true;
+                }
+
+                if (piece.Color != Color)
+                {
+                    moves.Add(new Vector2Int(x, y));
+                }
+                else
+                {
+                    // du même côté
+                }
+
+                return false;
             }
-            if (piece.Color != Color)
-            {
-                moves.Add(new Vector2Int(Pos.x + dir.x, Pos.y + dir.y));
-            }
-            else
-            {
-                // same side
-            }
-            return false;
-        }
+        
     }
 }

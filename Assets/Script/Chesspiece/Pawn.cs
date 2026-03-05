@@ -6,12 +6,6 @@ namespace Chesspiece
     public class Pawn : Piece
     {
         public override int Value => 1;
-        public override void MovePiece(Piece[,] board,Vector2Int movement)
-        {
-            board[movement.x, movement.y] = this;
-            board[Pos.x, Pos.y] = null;
-            Pos = movement;
-        }
         public Pawn(ColorPiece color) : base(color) {}
 
         public override List<Vector2Int> GetAvailableMoves(Piece[,] board)

@@ -8,13 +8,6 @@ namespace Chesspiece
     {
         public override int Value => int.MaxValue;
 
-        public override void MovePiece(Piece[,] board, Vector2Int movement)
-        {
-            board[movement.x, movement.y] = this;
-            board[Pos.x, Pos.y] = null;
-            Pos = movement;
-        }
-
         public King(ColorPiece color) : base(color)
         {
         }

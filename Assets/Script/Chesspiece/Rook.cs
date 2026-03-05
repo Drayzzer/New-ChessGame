@@ -7,13 +7,6 @@ namespace Chesspiece
     {
         public override int Value => 5;
         
-        public override void MovePiece(Piece[,] board,Vector2Int movement)
-        {
-            board[movement.x, movement.y] = this;
-            board[Pos.x, Pos.y] = null;
-            Pos = movement;
-        }
-        
         public Rook(ColorPiece color) : base(color) { }
 
         public override List<Vector2Int> GetAvailableMoves(Piece[,] board)
@@ -21,25 +14,25 @@ namespace Chesspiece
             List<Vector2Int> moves = new List<Vector2Int>();
             
             // Right
-            for (int i = Pos.x + 1; i < board.GetLength(0); i++)
+            for (int i = 1; i < board.GetLength(0); i++)
             {
                 if (!TryAddPosition(board, moves, new Vector2Int(i, 0))) break;
             }
             
             //Left
-            for (int i = Pos.x - 1; i >= 0; i--)
+            for (int i = 1; i >= 0; i--)
             { 
                 if (!TryAddPosition(board, moves, new Vector2Int(-i, 0))) break;
             }
             
             // Top
-            for (int i = Pos.y + 1; i < board.GetLength(0); i++)
+            for (int i = 1; i < board.GetLength(0); i++)
             { 
                 if (!TryAddPosition(board, moves, new Vector2Int(0, i))) break; 
             }
             
             // Bottom
-            for (int i = Pos.y - 1; i >= 0; i--)
+            for (int i = 1; i >= 0; i--)
             {
                 if (!TryAddPosition(board, moves, new Vector2Int(0, -i))) break;
             }

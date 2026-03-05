@@ -54,13 +54,17 @@ public class Node
         // Je fait la somme de mes pièces moins la somme des pièces adverse
         foreach (Piece piece in Board.Matrix)
         {
+            if (piece == null)
+            {
+                continue;
+            }
             if (PlayerTurn == piece.Color)
             {
                 
                 Totalheuristic += piece.Value;
             }
             
-            if (PlayerTurn == piece.Color)
+            if (PlayerTurn != piece.Color)
             {
                 Totalheuristic -= piece.Value;
             }

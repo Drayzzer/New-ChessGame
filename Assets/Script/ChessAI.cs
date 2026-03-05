@@ -42,6 +42,14 @@ namespace Script
         {
             Node startingNode = new Node(_board);
             MinMax(startingNode, 2, true);
+            startingNode = new Node(_board);
+
+            Node bestNode = null;
+            foreach (Node child in startingNode.GetChildren())
+            {
+                MinMax(child, 1, false);
+            }
+            _board = bestNode.Board;
         }
         
         public float MinMax(Node node, int depth, bool maximizingPlayer)
@@ -68,6 +76,7 @@ namespace Script
                 }
             }
             return value;
+           // return (bestNode, value);
         }
     }
 }
