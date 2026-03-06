@@ -18,6 +18,7 @@ namespace Script
             _board.SetupBaseBoard();
             _board.SetupPieces();
             
+            
             _link.SetAllTiles(_board);
 
             //permet de parcourir le plateau
@@ -54,29 +55,37 @@ namespace Script
         
         public float MinMax(Node node, int depth, bool maximizingPlayer)
         {
+            // Node currentNextNode = null;
+            
             if (depth == 0 || node.GetChildren().Count == 0)
             { 
                 return node.GetHeuristic();
-            } 
+            }
+            
             float value;
+            
             if (maximizingPlayer)
             {
                 value = Mathf.NegativeInfinity;
                 foreach (Node child in node.GetChildren())
                 {
                     value = Math.Max(value, MinMax(child, depth - 1, false));
+                    
+                    return  value;
                 }
             }
+            //MinimizingPlayer
             else
             {
                 value = Mathf.Infinity;
                 foreach (Node child in node.GetChildren())
                 {
                     value = Math.Min(value, MinMax(child, depth - 1, true));
+                    
+                    return  value;
                 }
             }
-            return value;
-           // return (bestNode, value);
+            return  value;
         }
     }
 }
