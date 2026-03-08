@@ -48,7 +48,7 @@ public class Node
         }
         return children;
     }
-    public int GetHeuristic()
+    public float GetHeuristic()
     {
         int Totalheuristic = 0;
         // Je fait la somme de mes pièces moins la somme des pièces adverse
@@ -60,7 +60,6 @@ public class Node
             }
             if (PlayerTurn == piece.Color)
             {
-                
                 Totalheuristic += piece.Value;
             }
             

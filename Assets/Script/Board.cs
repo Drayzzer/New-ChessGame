@@ -19,8 +19,7 @@ namespace Script
                 { null, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
-                { new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White)
-                },
+                { new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White) },
                 { new Rook(ColorPiece.White), new Knight(ColorPiece.White), new Bishop(ColorPiece.White), new King(ColorPiece.White), new Queen(ColorPiece.White), new Bishop(ColorPiece.White), new Knight(ColorPiece.White), new Rook(ColorPiece.White) },
             };
         }

@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace Script
 {
-    public class Link : MonoBehaviour
+    public class Link : Monobehaviour
     {
         [SerializeField] private Tilemap tilemap;
          

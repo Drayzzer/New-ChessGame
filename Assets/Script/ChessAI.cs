@@ -8,7 +8,8 @@ namespace Script
     {
         private Link _link;
         private Board _board;
-
+        private bool PlayerTurn = true;
+        
         private void Start()
         {
             _link = GetComponent<Link>();
@@ -17,7 +18,6 @@ namespace Script
              _board = new Board();
             _board.SetupBaseBoard();
             _board.SetupPieces();
-            
             
             _link.SetAllTiles(_board);
 
@@ -35,33 +35,35 @@ namespace Script
         {
             if (Input.GetButtonDown("Jump"))
             {
-                Think(_board.Matrix);
+                Debug.Log("Jump");
+                Think();
             }
         }
         
-        public void Think(Piece[,] board)
+        public void Think()
         {
             Node startingNode = new Node(_board);
-            MinMax(startingNode, 2, true);
-            startingNode = new Node(_board);
-
-            Node bestNode = null;
-            foreach (Node child in startingNode.GetChildren())
+            Node bestPlay = MinMax(startingNode, 2, PlayerTurn).Item1;
+            startingNode = new Node(bestPlay.Board);
+            
+            if (PlayerTurn) 
             {
-                MinMax(child, 1, false);
+                PlayerTurn = false;
             }
-            _board = bestNode.Board;
+            else
+            {
+                PlayerTurn = true;
+            }
+            startingNode.Board.SetupPieces();
         }
         
-        public float MinMax(Node node, int depth, bool maximizingPlayer)
+        public (Node, float) MinMax(Node node, int depth, bool maximizingPlayer )
         {
-            // Node currentNextNode = null;
-            
+            Node NextNode = null;
             if (depth == 0 || node.GetChildren().Count == 0)
             { 
-                return node.GetHeuristic();
+                return (node, node.GetHeuristic());
             }
-            
             float value;
             
             if (maximizingPlayer)
@@ -69,9 +71,15 @@ namespace Script
                 value = Mathf.NegativeInfinity;
                 foreach (Node child in node.GetChildren())
                 {
-                    value = Math.Max(value, MinMax(child, depth - 1, false));
-                    
-                    return  value;
+                    value = Math.Max(value, MinMax(child, depth - 1, false).Item2);
+                    if (NextNode == null)
+                    {
+                        NextNode = child;
+                    }
+                    if (NextNode.GetHeuristic() < child.GetHeuristic())
+                    {
+                        NextNode = child;
+                    }
                 }
             }
             //MinimizingPlayer
@@ -80,12 +88,18 @@ namespace Script
                 value = Mathf.Infinity;
                 foreach (Node child in node.GetChildren())
                 {
-                    value = Math.Min(value, MinMax(child, depth - 1, true));
-                    
-                    return  value;
+                    value = Math.Min(value, MinMax(child, depth - 1, true).Item2);
+                    if (NextNode == null)
+                    {
+                        NextNode = child;
+                    }
+                    if (NextNode.GetHeuristic() > child.GetHeuristic())
+                    {
+                        NextNode = child;
+                    }
                 }
             }
-            return  value;
+            return  (NextNode, value);
         }
     }
 }
