@@ -22,6 +22,11 @@ namespace Chesspiece
         {
             Color = color;
         }
+
+        public string DebugInfo() {
+            string info = "La pièce avec la value" + Value + " est à la posision" + Pos;
+            return info;
+        }
         
         public abstract List<Vector2Int> GetAvailableMoves(Piece[,] board);
 
@@ -34,6 +39,7 @@ namespace Chesspiece
                 Debug.LogError("Something goes wrong with " + GetType().FullName + " y: " + movement.y);
             
             board[movement.x, movement.y] = this;
+            //Debug.Log(GetType().FullName +  " Move From " + Pos + " to " + movement);
             board[Pos.x, Pos.y] = null;
             Pos = movement;
         }
@@ -67,9 +73,7 @@ namespace Chesspiece
                 {
                     // du même côté
                 }
-
                 return false;
             }
-        
     }
 }

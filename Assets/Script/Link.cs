@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 namespace Script
 {
-    public class Link : Monobehaviour
+    public class Link : MonoBehaviour
     {
         [SerializeField] private Tilemap tilemap;
          
@@ -30,7 +30,7 @@ namespace Script
                     Piece piece = board.Matrix[i, j];
                     //permet de placer les pions sur l'échiquier
                     switch (piece)
-                    {   
+                    {
                         case Pawn:
                             tilemap.SetTile(new Vector3Int(j, i, 0), piece.Color == ColorPiece.White ? WhitePawn : BlackPawn);
                             break;
@@ -59,6 +59,7 @@ namespace Script
         public void ClearAllTiles()
         {
             tilemap.ClearAllTiles();
+            Debug.Log("C'est nettoyé");
         }
     }
 }

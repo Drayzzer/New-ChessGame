@@ -6,21 +6,18 @@ namespace Script
 {
     public class ChessAI : MonoBehaviour
     {
-        private Link _link;
+        [SerializeField] private Link link;
         private Board _board;
         private bool PlayerTurn = true;
         
         private void Start()
         {
-            _link = GetComponent<Link>();
-            
+            link = GetComponent<Link>();
             //Création du board
-             _board = new Board();
-            _board.SetupBaseBoard();
+            _board = new Board();
+            _board.SetupTestBoard();
             _board.SetupPieces();
-            
-            _link.SetAllTiles(_board);
-
+            link.SetAllTiles(_board);
             //permet de parcourir le plateau
             for (int i = 0; i < _board.Matrix.GetLength(0); i++)
             {
@@ -44,8 +41,8 @@ namespace Script
         {
             Node startingNode = new Node(_board);
             Node bestPlay = MinMax(startingNode, 2, PlayerTurn).Item1;
-            startingNode = new Node(bestPlay.Board);
-            
+            _board = bestPlay.Board;
+            Debug.Log("blablot");
             if (PlayerTurn) 
             {
                 PlayerTurn = false;
@@ -54,7 +51,8 @@ namespace Script
             {
                 PlayerTurn = true;
             }
-            startingNode.Board.SetupPieces();
+            link.ClearAllTiles();
+            link.SetAllTiles(bestPlay.Board);
         }
         
         public (Node, float) MinMax(Node node, int depth, bool maximizingPlayer )

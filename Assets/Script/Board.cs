@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Chesspiece;
 using UnityEngine;
 
@@ -8,27 +9,28 @@ namespace Script
     {
         //l'échiquier
         public Piece[,] Matrix;
+        public List<Piece> Pieces = new List<Piece>();
 
         public void SetupBaseBoard()
         {
-            Matrix = new Piece[,]
-            {
-                { new Rook(ColorPiece.Black), new Knight(ColorPiece.Black), new Bishop(ColorPiece.Black), new King(ColorPiece.Black), new Queen(ColorPiece.Black), new Bishop(ColorPiece.Black), new Knight(ColorPiece.Black), new Rook(ColorPiece.Black) },
-                { new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black) },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { null, null, null, null, null, null, null, null },
-                { new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White) },
-                { new Rook(ColorPiece.White), new Knight(ColorPiece.White), new Bishop(ColorPiece.White), new King(ColorPiece.White), new Queen(ColorPiece.White), new Bishop(ColorPiece.White), new Knight(ColorPiece.White), new Rook(ColorPiece.White) },
-            };
+            // Matrix = new Piece[,]
+            // {
+            //     { new Rook(ColorPiece.White), new Knight(ColorPiece.White), new Bishop(ColorPiece.White), new King(ColorPiece.White), new Queen(ColorPiece.White), new Bishop(ColorPiece.White), new Knight(ColorPiece.White), new Rook(ColorPiece.White) },
+            //     { new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White), new Pawn(ColorPiece.White) },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { null, null, null, null, null, null, null, null },
+            //     { new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black), new Pawn(ColorPiece.Black) },
+            //     { new Rook(ColorPiece.Black), new Knight(ColorPiece.Black), new Bishop(ColorPiece.Black), new King(ColorPiece.Black), new Queen(ColorPiece.Black), new Bishop(ColorPiece.Black), new Knight(ColorPiece.Black), new Rook(ColorPiece.Black) },
+            // };
         }
         
         public void SetupTestBoard()
         {
             Matrix = new Piece[,]
             {
-                { null, null, null, null, null, null, null, null },
+                { null, null, null,  new Knight(ColorPiece.White), null, null, null, null },
                 { null, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
                 { null, null, null, null, null, null, null, null },
@@ -63,6 +65,10 @@ namespace Script
                 {
                     Piece piece = Matrix[i, j];
                     obj.Matrix[i, j] = (Piece)piece?.Clone();
+                    if (piece != null)
+                    {
+                        Pieces.Add(piece);
+                    }
                 }
             }
             return obj;

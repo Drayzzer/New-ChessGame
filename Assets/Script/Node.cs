@@ -13,6 +13,10 @@ public class Node
     public Node(Board board)
     {
         Board = board.Clone() as Board;
+        Debug.Log("je suis bien cloné avec :");
+        foreach (var piece in Board.Pieces) {
+            Debug.Log(piece.DebugInfo());
+        }
     }
     //Graph des noeuds
     public List<Node> GetChildren()
